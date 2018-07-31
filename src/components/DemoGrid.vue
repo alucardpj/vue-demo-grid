@@ -12,7 +12,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="entry in filteredData" :key="entry.id">
+      <tr v-for="entry in filteredData" :key="entry.id"
+          @click="select(entry)"
+          :class="{ active: activeName.includes(entry['name']) }">
         <td v-for="key in columns" :key="key.id">
           {{entry[key]}}
         </td>
@@ -36,7 +38,8 @@ export default {
     })
     return {
       sortKey: '',
-      sortOrders: sortOrders
+      sortOrders: sortOrders,
+      activeName: []
     }
   },
   computed: {
@@ -75,6 +78,16 @@ export default {
     sortBy: function (key) {
       this.sortKey = key
       this.sortOrders[key] = this.sortOrders[key] * -1
+    },
+    select: function (key) {
+      var v = this
+      // debugger;
+      if (v.activeName.indexOf(key['name']) === -1) {
+        v.activeName.push(key['name'])
+      } else {
+        // debugger;
+        v.activeName.splice(v.activeName.indexOf(key['name']), 1)
+      }
     }
   }
 }
@@ -97,10 +110,6 @@ th {
   user-select: none;
 }
 
-td {
-  background-color: #f9f9f9;
-}
-
 th,
 td {
   min-width: 120px;
@@ -113,6 +122,14 @@ th.active {
 
 th.active .arrow {
   opacity: 1;
+}
+
+tr.active {
+  background-color: aqua;
+}
+
+tr {
+  background-color: #f9f9f9;
 }
 
 .arrow {
