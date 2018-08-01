@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
     <router-view/>
-    <router-link :to="{ name: 'Grid'}">Grid</router-link>
+    <!-- <router-link :to="{ name: 'Grid'}">Grid</router-link>
     <router-link :to="{ name: 'HelloWorld'}">HelloWorld</router-link>
-    <router-link :to="{ name: 'Demo'}">Demo</router-link>
+    <router-link :to="{ name: 'Demo'}">Demo</router-link> -->
   </div>
 </template>
 

@@ -1,14 +1,16 @@
 <template>
-    <div id="demo">
+  <div id="demo">
     <form id="search">
-        Search <input name="query" v-model="searchQuery">
+        查找 <input name="query" v-model="searchQuery">
     </form>
     <DemoGrid
         :data="gridData"
         :columns="gridColumns"
-        :filter-key="searchQuery">
+        :filter-key="searchQuery"
+        ref="grid">
     </DemoGrid>
-    </div>
+    <button @click="printMobile()">导出</button>
+  </div>
 </template>
 
 <script>
@@ -34,6 +36,12 @@ export default {
         console.log(error)
       })
   },
+  methods: {
+    printMobile () {
+      // debugger
+      console.log(this.$refs.grid.activeMobile)
+    }
+  },
   components: {
     DemoGrid
   }
@@ -41,9 +49,8 @@ export default {
 </script>
 
 <style>
-body {
-  font-family: Helvetica Neue, Arial, sans-serif;
-  font-size: 14px;
-  color: #444;
+button {
+  height: 50px;
+  width: 100px;
 }
 </style>

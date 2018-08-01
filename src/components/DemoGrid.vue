@@ -14,7 +14,7 @@
     <tbody>
       <tr v-for="entry in filteredData" :key="entry.id"
           @click="select(entry)"
-          :class="{ active: activeName.includes(entry['name']) }">
+          :class="{ active: activeMobile.includes(entry['mobile']) }">
         <td v-for="key in columns" :key="key.id">
           {{entry[key]}}
         </td>
@@ -39,7 +39,7 @@ export default {
     return {
       sortKey: '',
       sortOrders: sortOrders,
-      activeName: []
+      activeMobile: []
     }
   },
   computed: {
@@ -82,11 +82,11 @@ export default {
     select: function (key) {
       var v = this
       // debugger;
-      if (v.activeName.indexOf(key['name']) === -1) {
-        v.activeName.push(key['name'])
+      if (v.activeMobile.indexOf(key['mobile']) === -1) {
+        v.activeMobile.push(key['mobile'])
       } else {
         // debugger;
-        v.activeName.splice(v.activeName.indexOf(key['name']), 1)
+        v.activeMobile.splice(v.activeMobile.indexOf(key['mobile']), 1)
       }
     }
   }
