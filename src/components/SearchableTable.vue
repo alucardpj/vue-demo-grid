@@ -13,30 +13,26 @@
 
 <script>
 import DemoGrid from './DemoGrid'
+import axios from 'axios'
 
 export default {
   name: 'SearchableTable',
   data () {
-    var data = this.gridData
-    this.$http.get('static/data.json').then(response => {
-      console.log('数据加载成功')
-      data = JSON.parse(response.data)
-      console.log(data)
-      // self.tableContent.push(response.body);
-    }, response => {
-      console.log('数据加载失败')
-    })
     return {
       searchQuery: '',
       gridColumns: ['name', 'mobile'],
-      gridData: data
-      // [
-      //   { name: 'Chuck Norris', power: Infinity },
-      //   { name: 'Bruce Lee', power: 9000 },
-      //   { name: 'Jackie Chan', power: 7000 },
-      //   { name: 'Jet Li', power: 8000 }
-      // ]
+      gridData: []
     }
+  },
+  mounted () {
+    axios
+      .get('static/data.json')
+      .then(response => {
+        this.gridData = response.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
   },
   components: {
     DemoGrid
